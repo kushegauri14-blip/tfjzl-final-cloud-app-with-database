@@ -95,14 +95,20 @@ def show_exam_result(request, course_id, submission_id):
             'grade': question.grade,
         })
 
-    context = {
-        'course': course,
-        'submission': submission,
-        'score': score,
-        'total': total,
-        'choices': submission.choices.all(),
-        'exam_results': exam_results,
-    }
+    selected_ids = list(
+    submission.choices.values_list('id', flat=True)
+)
+
+context = {
+    'course': course,
+    'submission': submission,
+    'score': score,
+    'total': total,
+    'grade': total,
+    'choices': submission.choices.all(),
+    'selected_ids': selected_ids,
+    'exam_results': exam_results,
+}
 
     return render(
         request,
