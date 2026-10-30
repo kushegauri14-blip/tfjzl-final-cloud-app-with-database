@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
 
     <title>{{ course.name }}</title>
 
+    <!-- Bootstrap CSS -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -14,41 +16,64 @@
 
 <body class="bg-light">
 
-<div class="container py-5">
+    <div class="container py-5">
 
-    <div class="card shadow-sm">
-        <div class="card-body">
+        <!-- Course details card -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
 
-            <h1 class="mb-3">{{ course.name }}</h1>
+                <h1 class="card-title text-primary mb-3">
+                    {{ course.name }}
+                </h1>
 
-            <p class="text-muted">
-                {{ course.description }}
-            </p>
+                <p class="card-text">
+                    {{ course.description }}
+                </p>
 
-            <hr>
+            </div>
+        </div>
 
-            <h2 class="h4 mb-3">Course Lessons</h2>
+        <!-- Lessons section -->
+        <h2 class="mb-4">Course Lessons</h2>
+
+        <div class="row">
 
             {% for lesson in course.lessons.all %}
-                <div class="card mb-3">
-                    <div class="card-body">
 
-                        <h3 class="h5">{{ lesson.title }}</h3>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
 
-                        <p>{{ lesson.content }}</p>
+                        <div class="card-body">
+
+                            <h3 class="card-title h5">
+                                {{ lesson.title }}
+                            </h3>
+
+                            <p class="card-text">
+                                {{ lesson.content }}
+                            </p>
+
+                        </div>
 
                     </div>
                 </div>
+
             {% empty %}
-                <div class="alert alert-info">
-                    No lessons are available for this course yet.
+
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        No lessons are available for this course yet.
+                    </div>
                 </div>
+
             {% endfor %}
 
         </div>
+
     </div>
 
-</div>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
