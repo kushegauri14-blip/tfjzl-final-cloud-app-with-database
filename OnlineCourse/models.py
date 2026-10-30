@@ -29,16 +29,7 @@ class Question(models.Model):
         on_delete=models.CASCADE,
         related_name="questions"
     )
-    course = models.ForeignKey(
-        Course,
-        on_delete=models.CASCADE,
-        related_name="questions"
-    )
     question_text = models.CharField(max_length=500)
-    grade = models.IntegerField(default=0)
-
-    def is_get_score(self):
-        return self.grade > 0
 
     def __str__(self):
         return self.question_text
@@ -81,8 +72,6 @@ class Submission(models.Model):
 
     def __str__(self):
         return f"Submission by {self.enrollment.user.username}"
-
-
 class Instructor(models.Model):
     user = models.OneToOneField(
         User,
@@ -101,3 +90,6 @@ class Learner(models.Model):
 
     def __str__(self):
         return self.user.username
+
+admin.site.register(Instructor)
+admin.site.register(Learner)
